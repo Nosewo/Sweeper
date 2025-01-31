@@ -1,0 +1,1 @@
+C:\lua\lua\V5_4_2\lua.exe main.lua
