@@ -1,5 +1,6 @@
 
 local View = {}
+local controller = require("Controller")
 
 function View.createButton(x, y, width, height, text, onClick)
     return {
@@ -42,13 +43,15 @@ View.buttons = {}
 
 function View:CreateField()
     local buttonWidth, buttonHeight = 40, 40
-    for i = 0, 19 do
-        for j = 0, 39 do
+    for i = 0, 14 do
+        for j = 0, 19 do
             table.insert(self.buttons, self.createButton(j * buttonWidth, i * buttonHeight, buttonWidth, buttonHeight, "", function()
                 print("Button at (" .. j .. ", " .. i .. ") clicked!")
+                controller
             end))
         end
     end
+
 end
 
 function View:draw()
