@@ -34,25 +34,31 @@ function View.createButton(x, y, width, height, text, onClick)
 
         click = function(self)
             if self.isHovered and self.onClick then
-                self.onClick()
+                self.onClick(self) 
             end
         end
     }
 end
+
 View.buttons = {}
 
 function View:CreateField()
     local buttonWidth, buttonHeight = 40, 40
-    for i = 0, 14 do
-        for j = 0, 19 do
-            table.insert(self.buttons, self.createButton(j * buttonWidth, i * buttonHeight, buttonWidth, buttonHeight, "", function()
-                print("Button at (" .. j .. ", " .. i .. ") clicked!")
-                controller
+    for i = 1, 19 do
+        for j = 1, 29 do
+            table.insert(self.buttons, self.createButton(j * buttonWidth, i * buttonHeight, buttonWidth, buttonHeight, "", function(button)
+                local stext = "O"
+                if controller.isFail(i, j)== 9 then
+                    stext ="X"
+                else
+                    controller.checkField(i, j)
+                end
+                button.text = tostring(stext)
             end))
         end
     end
-
 end
+
 
 function View:draw()
     for _, button in ipairs(self.buttons) do
