@@ -3,7 +3,7 @@ local View = require("View")
 
 
 function love.load()
-    require("View"):CreateField()  
+    require("View"):CreateStartScreen()  
 end
 
 function love.update(dt)
@@ -17,7 +17,10 @@ end
 
 function love.mousepressed(x, y, buttonType, istouch, presses)
     if buttonType == 1 then
-        for _, button in ipairs(View.buttons) do
+        for _, button in pairs(View.buttons) do
+            button:click()
+        end
+        for _, button in pairs(View.StartButtons) do
             button:click()
         end
     end

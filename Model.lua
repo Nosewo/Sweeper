@@ -1,5 +1,5 @@
 local model = {}
-
+require("const")
 model.field = {}
 
 function model.ran()
@@ -25,7 +25,7 @@ function model.CreateField(difficulty)
    for i = 1, 15, 1 do
     local randomNumbers = model.getRandomNumbers(numbersOfFailures)
     for _, num in ipairs(randomNumbers) do
-        model.field[i][num]=9 -- verloren
+        model.field[i][num]=const.VERLOREN -- verloren
     end
    end
 end
