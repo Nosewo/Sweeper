@@ -9,16 +9,38 @@ function View:CreateStartScreen()
     
     love.graphics.setBackgroundColor(0.1, 0.1, 0.1) -- Dunkler Hintergrund
     love.graphics.setColor(1, 1, 1) -- Weißer Text
-    local quickanddirty = {Map1=love.graphics.newImage("Map1.png"),Map2=love.graphics.newImage("Map2.png"),Map3=love.graphics.newImage("Map3.png"),}
-    local quickanddirtea = quickanddirty.Map1 
+    local quickanddirty = {love.graphics.newImage("Map1.png"),love.graphics.newImage("Map2.png"), love.graphics.newImage("Map3.png"),}
+    local iMap = 1
+    local iPlayer = 1
+    self.StartScreen["Map"]= quickanddirty[iMap]
     
-    self.StartScreen["Map"]= quickanddirtea
-    
+    self.StartButtons["MapRight"]= View.createButton(200,250,100,40,">",function(button)
+        iMap=iMap+1
+        if iMap == 4 then
+          iMap = 1  
+        end
+        self.StartScreen["Map"]=quickanddirty[iMap]
+    end)
+    self.StartButtons["MapLeft"]= View.createButton(100,250,100,40,"<",function(button)
+        iMap=iMap-1
+        if iMap == 0 then
+          iMap = 3  
+        end
+        self.StartScreen["Map"]=quickanddirty[iMap]
+    end)
     self.StartButtons["PlayerRight"]= View.createButton(200,250,100,40,">",function(button)
-        
+        iMap=iMap+1
+        if iMap == 4 then
+          iMap = 1  
+        end
+        self.StartScreen["Map"]=quickanddirty[iMap]
     end)
     self.StartButtons["PlayerLeft"]= View.createButton(100,250,100,40,"<",function(button)
-        
+        iMap=iMap-1
+        if iMap == 0 then
+          iMap = 3  
+        end
+        self.StartScreen["Map"]=quickanddirty[iMap]
     end)
     self.StartButtons["Sound"]= View.createButton(600,0,100,40,"TON",function(button)
         
