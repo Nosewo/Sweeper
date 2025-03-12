@@ -9,51 +9,59 @@ function View:CreateStartScreen()
     
     love.graphics.setBackgroundColor(0.1, 0.1, 0.1) -- Dunkler Hintergrund
     love.graphics.setColor(1, 1, 1) -- Weißer Text
-    local quickanddirty = {love.graphics.newImage("Map1.png"),love.graphics.newImage("Map2.png"), love.graphics.newImage("Map3.png"),}
+    local diffrentMaps = {love.graphics.newImage("Map1.png"),love.graphics.newImage("Map2.png"), love.graphics.newImage("Map3.png"),}
+    local diffrentPlayers = {love.graphics.newImage("Player1.png"),love.graphics.newImage("Player2.png"),}
+    local diffrentPlayersData = {love.image.newImageData("Player1.png"),love.image.newImageData("Player2.png"),}
     local iMap = 1
     local iPlayer = 1
-    self.StartScreen["Map"]= quickanddirty[iMap]
+    self.StartScreen["Map"]= diffrentMaps[iMap]
+    self.StartScreen["Player"]= diffrentPlayers[iPlayer]
     
     self.StartButtons["MapRight"]= View.createButton(200,250,100,40,">",function(button)
-        iMap=iMap+1
+        iMap=iMap+1 -- variable machen
         if iMap == 4 then
           iMap = 1  
         end
-        self.StartScreen["Map"]=quickanddirty[iMap]
+        self.StartScreen["Map"]=diffrentMaps[iMap]
     end)
     self.StartButtons["MapLeft"]= View.createButton(100,250,100,40,"<",function(button)
         iMap=iMap-1
         if iMap == 0 then
           iMap = 3  
         end
-        self.StartScreen["Map"]=quickanddirty[iMap]
+        self.StartScreen["Map"]=diffrentMaps[iMap]
     end)
-    self.StartButtons["PlayerRight"]= View.createButton(200,250,100,40,">",function(button)
-        iMap=iMap+1
-        if iMap == 4 then
-          iMap = 1  
+    self.StartButtons["PlayerRight"]= View.createButton(600,250,100,40,">",function(button)
+        iPlayer=iPlayer+1
+        if iPlayer == 3 then
+            iPlayer = 1  
         end
-        self.StartScreen["Map"]=quickanddirty[iMap]
+        self.StartScreen["Player"]=diffrentPlayers[iPlayer]
+        love.setCursor(diffrentPlayersData[iPlayer])
     end)
-    self.StartButtons["PlayerLeft"]= View.createButton(100,250,100,40,"<",function(button)
-        iMap=iMap-1
-        if iMap == 0 then
-          iMap = 3  
+    self.StartButtons["PlayerLeft"]= View.createButton(500,250,100,40,"<",function(button)
+        iPlayer=iPlayer-1
+        if iPlayer == 0 then
+            iPlayer = 2  
         end
-        self.StartScreen["Map"]=quickanddirty[iMap]
+        self.StartScreen["Player"]=diffrentPlayers[iPlayer]
+       love.setCursor(diffrentPlayersData[iPlayer]) 
     end)
     self.StartButtons["Sound"]= View.createButton(600,0,100,40,"TON",function(button)
         
     end)
     self.StartButtons["difficulty"]= View.createButton(200,0,100,40,"Leicht",function(button)
+        if self.StartButtons.difficulty.text == "Schwer" then
+           self.StartButtons.difficulty.text= "Leicht" 
+        else
         self.StartButtons.difficulty.text= "Schwer"
+        end
     end)
     self.StartButtons["StartButton"]= View.createButton(350,500,100,40,"START",function(button)
         self:CreateField()
-        self.StartButtons.StartButton.enabled =false
-        self.StartButtons.PlayerLeft.enabled =false
-        self.StartButtons.PlayerRight.enabled =false
-        self.StartButtons.difficulty.enabled =false
+        for _, button in pairs(self.StartButtons) do
+            button.enabled = false
+         end
         self.bStart = false
     end)
 end
@@ -110,7 +118,8 @@ View.buttons = {}
 
 function View:CreateField()
     self.buttons["BackToStart"]= View.createButton(700,0,100,40,"BackToStart",function(button)
-        self.bStart = true  
+        self.bStart = true
+        
     end)
     local buttonWidth, buttonHeight = 40, 40
     for i = 1, 14 do
@@ -136,14 +145,16 @@ function View:draw()
         end  
     end 
     
-    for _, StartButtons in pairs(self.StartButtons) do
-        StartButtons:draw()
-    end
     if self.bStart then
-        for _, StartScreen in pairs(self.StartScreen) do
-            love.graphics.setColor(1,1,1)
-            love.graphics.draw(StartScreen,150,150)
-        end  
+        for _, button in pairs(self.StartButtons) do
+            button.enabled = true
+         end
+        for _, StartButtons in pairs(self.StartButtons) do
+            StartButtons:draw()
+        end
+        love.graphics.setColor(1,1,1)
+        love.graphics.draw(self.StartScreen["Map"], 150, 150)   
+        love.graphics.draw(self.StartScreen["Player"], 580, 180)
     end
 end
 
