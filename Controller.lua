@@ -5,6 +5,12 @@ local model = require("Model")
  function controller.isFail(x,y)
     return model:isFail(x,y)        
  end
+ function controller.getText(Text)
+    return model:getText(Text)
+ end
+ function controller.setLanguage(LanguageNo)
+   model.iLanguage = LanguageNo 
+ end
  function controller.checkField(x,y)
    local field = {}
    for i = 1, 15, 1 do

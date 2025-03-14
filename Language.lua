@@ -1,0 +1,31 @@
+languages = {} 
+ languages.German = {
+   Start= "Start",
+   Schwer= "Schwer",
+   Leicht= "Leicht",
+   Tonan = "TON(An)",
+   Tonaus = "TON(Off)",
+   Hauptmenue="Hauptmenue",
+   Deutsch = "Deutsch",
+   Englisch= "Englisch",
+   X ="X",
+   O ="O",
+   Links = "<",
+   Rechts = ">",
+   Nichts =""
+}
+ languages.English = {
+    Start= "Start",
+    Schwer= "Hard",
+    Leicht= "Easy",
+    Tonan = "Sound(On)",
+    Tonaus = "Sound(Off)",
+    Hauptmenue="Mainmenue",
+    Deutsch = "German",
+    Englisch = "English",
+    X ="X",
+    O ="O" ,
+    Links = "<",
+    Rechts = ">",
+    Nichts =""
+ }

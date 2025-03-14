@@ -1,12 +1,22 @@
 local model = {}
 require("const")
 model.field = {}
+require("Language")
+model.iLanguage = const.German
 
 function model.ran()
     math.randomseed(os.time()) -- Zufall nur einmal initialisieren
 end
 
-
+function model:getText(Text)
+    local returnText = "Irgendwashalt"
+   if self.iLanguage == const.German then
+    returnText = languages.German[Text]
+    elseif self.iLanguage == const.English then
+    returnText = languages.English[Text]    
+   end
+   return returnText
+end
 function model.CreateField(difficulty)
     for i = 1, 15, 1 do
         model.field[i] = {}
